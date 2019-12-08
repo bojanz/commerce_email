@@ -63,7 +63,9 @@ class EmailSubscriber implements EventSubscriberInterface {
       $email_event = $email->getEvent();
       if ($email_event->getEventName() == $event_name) {
         $entity = $email_event->extractEntityFromEvent($event);
-        $this->emailSender->send($email, $entity);
+        if ($email->applies($entity)) {
+          $this->emailSender->send($email, $entity);
+        }
       }
     }
   }
