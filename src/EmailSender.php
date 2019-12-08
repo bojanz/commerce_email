@@ -81,7 +81,7 @@ class EmailSender implements EmailSenderInterface {
    */
   protected function replaceTokens($value, ContentEntityInterface $entity) {
     if (!empty($value)) {
-      $value = \Drupal::token()->replace($value, [$entity->getEntityTypeId() => $entity]);
+      $value = $this->token->replace($value, [$entity->getEntityTypeId() => $entity]);
     }
     return $value;
   }
