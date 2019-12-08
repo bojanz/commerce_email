@@ -60,7 +60,6 @@ class EmailSender implements EmailSenderInterface {
     $params = [
       'id' => 'commerce_email',
       'from' => $this->replaceTokens($email->getFrom(), $entity),
-      // @todo Add CC support to the Commerce MailHandler.
       'cc' => $this->replaceTokens($email->getCc(), $entity),
       'bcc' => $this->replaceTokens($email->getBcc(), $entity),
     ];
