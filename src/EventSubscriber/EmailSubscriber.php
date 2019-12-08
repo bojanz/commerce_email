@@ -36,6 +36,12 @@ class EmailSubscriber implements EventSubscriberInterface {
    * {@inheritDoc}
    */
   public static function getSubscribedEvents() {
+    // This method could be called early when the container is built, so the
+    // email event manager might not be available yet.
+    if (!\Drupal::hasService('plugin.manager.commerce_email_event')) {
+      return [];
+    }
+
     /** @var \Drupal\Core\Plugin\DefaultPluginManager $email_event_manager */
     $email_event_manager = \Drupal::service('plugin.manager.commerce_email_event');
     $email_events = $email_event_manager->getDefinitions();
